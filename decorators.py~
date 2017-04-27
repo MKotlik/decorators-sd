@@ -1,0 +1,23 @@
+# SoftDev, Decorators Assignment
+# Misha Kotlik, James Yang
+
+from time import time
+
+def getExecutionTime(f):
+    sTime = time()
+    f()
+    fTime = time()
+    return fTime - sTime
+
+def getExecutionTimeW(f):
+    timeInitial = time()
+    def inner(f):
+        f()
+        return time() - timeInitial
+    return inner
+
+@getExecutionTimeW
+def hello():
+    print "Wassup"
+
+hello()
